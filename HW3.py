@@ -33,7 +33,14 @@ class CouponDispenser:
             coupon_cards (list[str]): list of possible coupons users can receive.
         """
         # TODO: Implement per instructions
-        pass
+        
+        self.coupon_cards = coupon_cards
+
+        # store the list of customers names in order of coupon recieved
+        customer_roster = []
+        # store the index of the coupon given to each customer
+        issued_indices = []
+
 
     def __str__(self):
         """
