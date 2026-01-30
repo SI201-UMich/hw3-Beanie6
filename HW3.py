@@ -49,8 +49,9 @@ class CouponDispenser:
         Returns:
             str
         """
-        # TODO: Implement per instructions
-        pass
+        all_coupons = "|".join(self.coupon_cards)
+        return all_coupons
+
 
     def issue_coupon(self, name):
         """
@@ -66,21 +67,25 @@ class CouponDispenser:
         Returns:
             str: message as described above
         """
-        if len(self.coupon_cards) == 0:
-            return "The box is empty"
+        if self.coupon_cards == []:
+            return("The box is empty")
         
         # checking if name is in customer_roster
-        for i in range(len(self.customer_roster)):
-            if self.customer_roster[i] == name:
-                return f"That name already has a coupon:{self.issued_indices[i]}"
+
+        for i in range(len(self.customer_roster)): 
+            if self.customer_roster[i] == name: 
+                return(f"That name already has a coupon: {self.issued_indices[i]}") 
+        
 
         # if the name is new and not found in customer_roster:
         # append name to roster and append a random coupon to issued indicies
+     
         rand_coupon = random.choice(self.coupon_cards)
         self.customer_roster.append(name)
         self.issued_indices.append(rand_coupon)
         
-        # return the assigned coupon text here
+        info = f"{self.customer_roster[-1]}: {self.issued_indices[-1]}"
+        return info
 
     def distribute_session(self):
         """
@@ -115,7 +120,7 @@ class CouponDispenser:
                     if x == "":
                         continue
                     else:
-                        self.issue_coupon(x)
+                        print(self.issue_coupon(x))
 
             round_number += 1
             user_input = input(f"Round {round_number} - Enter a name (or a comma-seperted list), or type 'show' or 'exit':")
@@ -148,7 +153,7 @@ def main():
       - After exit, call tally_distribution() to print the distribution in the terminal
     """
     coupon_cards = [
-        "10% off",
+       "10% off",
         "Free small coffee",
         "Buy 1 get 1 half off",
         "Free extra espresso shot",
