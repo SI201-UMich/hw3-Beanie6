@@ -116,11 +116,12 @@ class CouponDispenser:
             else:
                 peices = user_input.split(",")
                 
-                for x in peices:
-                    if x == "":
+                for text in peices:
+                    stripped_text = text.strip()
+                    if text == "":
                         continue
                     else:
-                        print(self.issue_coupon(x))
+                        print(self.issue_coupon(stripped_text))
 
             round_number += 1
             user_input = input(f"Round {round_number} - Enter a name (or a comma-seperted list), or type 'show' or 'exit':")
