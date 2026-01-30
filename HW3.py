@@ -9,7 +9,7 @@
 #    your Gen AI contract? If not, why?
 
 # I used gpt to help me debug my issue with my returned values not printing and also my issues with type errors. 
-# gpt also helped me with how to use the test functions and check for text errors like if my prompt matched the expected prompt exaclty.
+# gpt also helped me with how to use the test functions and check for text errors like if my prompt matched the expected prompt.
 # I asked gpt to not write me any code and to just give suggestions on what could be wrong.
 
 import random
@@ -165,6 +165,7 @@ class CouponDispenser:
 
 
 def main():
+
     coupon_cards = [
        "10% off",
         "Free small coffee",
