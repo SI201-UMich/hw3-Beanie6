@@ -36,9 +36,9 @@ class CouponDispenser:
         self.coupon_cards = coupon_cards
 
         # store the list of customers names in order of coupon recieved
-        customer_roster = []
+        self.customer_roster = []
         # store the index of the coupon given to each customer
-        issued_indices = []
+        self.issued_indices = []
 
 
     def __str__(self):
@@ -69,13 +69,18 @@ class CouponDispenser:
         if len(self.coupon_cards) == 0:
             return "The box is empty"
         
-        for i in len(self.customer_roster):
+        # checking if name is in customer_roster
+        for i in range(len(self.customer_roster)):
             if self.customer_roster[i] == name:
                 return f"That name already has a coupon:{self.issued_indices[i]}"
 
-        rand_coupon = random.randint(0,len(self.coupon_cards))
+        # if the name is new and not found in customer_roster:
+        # append name to roster and append a random coupon to issued indicies
+        rand_coupon = random.choice(self.coupon_cards)
         self.customer_roster.append(name)
-        self.issued_indices.append(self.coupon_cards[rand_coupon])
+        self.issued_indices.append(rand_coupon)
+        
+        # return the assigned coupon text here
 
     def distribute_session(self):
         """
@@ -92,9 +97,29 @@ class CouponDispenser:
 
         Reminder: Use lists only (no dictionaries).
         """
-        # TODO: Implement per instructions 
-        pass
+        round_number = 1
 
+        user_input = input(f"Round {round_number} - Enter a name (or a comma-seperted list), or type 'show' or 'exit':")
+        
+        while True:
+            if user_input == "exit":
+                print("Goodbye!")
+                break
+            if user_input == "show":
+                for i in range(len(self.customer_roster)):
+                    print(f"{self.customer_roster[i]}: {self.issued_indices[i]}")
+            else:
+                peices = user_input.split(",")
+                
+                for x in peices:
+                    if x == "":
+                        continue
+                    else:
+                        self.issue_coupon(x)
+
+            round_number += 1
+            user_input = input(f"Round {round_number} - Enter a name (or a comma-seperted list), or type 'show' or 'exit':")
+        
     def tally_distribution(self):
         """
         Extra credit:
@@ -130,8 +155,8 @@ def main():
     ]
 
     # Uncomment the lines below as you implement each function.
-    # box = CouponDispenser(coupon_cards)
-    # box.distribute_session()
+    box = CouponDispenser(coupon_cards)
+    box.distribute_session()
     # box.tally_distribution()
     pass
 
