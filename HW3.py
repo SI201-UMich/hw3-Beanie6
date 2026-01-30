@@ -32,7 +32,6 @@ class CouponDispenser:
         Args:
             coupon_cards (list[str]): list of possible coupons users can receive.
         """
-        # TODO: Implement per instructions
         
         self.coupon_cards = coupon_cards
 
@@ -67,8 +66,16 @@ class CouponDispenser:
         Returns:
             str: message as described above
         """
-        # TODO: Implement per instructions
-        pass
+        if len(self.coupon_cards) == 0:
+            return "The box is empty"
+        
+        for i in len(self.customer_roster):
+            if self.customer_roster[i] == name:
+                return f"That name already has a coupon:{self.issued_indices[i]}"
+
+        rand_coupon = random.randint(0,len(self.coupon_cards))
+        self.customer_roster.append(name)
+        self.issued_indices.append(self.coupon_cards[rand_coupon])
 
     def distribute_session(self):
         """
